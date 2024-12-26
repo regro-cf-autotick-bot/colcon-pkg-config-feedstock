@@ -10,19 +10,21 @@ source:
   sha256: c1d864aef5aa6209cb574eaac8fc7b6374f59a50f5c08d23d00684463926f33b
 
 build:
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv"
   noarch: python
 
 requirements:
   host:
     - pip
-    - python >=3.5
+    - python {{ python_min }}
   run:
-    - python >=3.5
+    - python >={{ python_min }}
     - colcon-core
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - {{ name.replace("-", "_") }}
 
